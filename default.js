@@ -214,4 +214,87 @@ class CommonTool {
         }
       }
     }
+
+    /**
+     * 双循环加去除
+     */
+    circleDelete(arr, fn) {
+      for (let i = 0, len = arr.length; i < len; i++) {
+        for(let j = i + 1; j < len; j++) {
+          if (fn) {
+            arr.splice(j, 1)
+            len--
+            j--
+          }
+        }
+      }
+    }
+
+    /**
+     * 防抖
+     */
+    debounce(fn, time) {
+      let timeout = null
+      return () => {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          fn.apply(this, arguments)
+        }, time)
+      }
+    }
+    /**
+     * 节流
+     */
+    throttle(fn, time) {
+      let flag = true
+      return () => {
+        if (!flag) return
+        flag = false
+        setTimeout(() => {
+          fn.apply(this, arguments)
+          flag = true
+        }, time)
+      }
+    }
+
+    /**
+     * JSONP
+     */
+    jsonP(option) {
+      let generateUrl  = () => {
+        let dataSrc = ''
+        for (let key in option.params) {
+          if (Object.prototype.hasOwnProperty.call(option.params, key)) {
+            dataSrc = `${key}=${option.params[key]}&`
+          }
+        }
+        dataSrc += `callback=${option.callbackName}`
+        return `${option.url}?${dataSrc}`
+      }
+      return new Promise((resolve, reject) => {
+        let scriptEl = document.createElement('script')
+        scriptEl.src = generateUrl()
+        document.body.appendChild(scriptEl)
+        window[option.callbackName] = data => {
+          resolve(data)
+          document.removeChild(scriptEl)
+        }
+      })
+    }
+
+    /**
+     * 图片懒加载可以给img标签统一自定义属性src='default.png'，当检测到图片出现在窗口之后再补充src属性，此时才会进行图片资源加载。
+     */
+    lazyLoad() {
+      let imgs = document.getElementsByTagName('img')
+      let len = imgs.length
+      let viewHeight = document.documentElement.clientHeight
+      let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop
+      for (let i =0; i < len; i++) {
+        let offsetHeight = imgs[i].offsetTop
+        if (offsetHeight < viewHeight + scrollHeight) {
+          imgs[i].src = simgs[i].dataset.srcrc
+        }
+      }
+    }
 }
