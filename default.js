@@ -372,4 +372,24 @@ class CommonTool {
   factorial(n) {
     return n < 0 ? (() => { throw new TypeError('Negative numbers are not allowed!') })() : n <= 1 ? 1 : n * this.factorial(n - 1)
   }
+
+  /**
+   * 禁止网页复制粘贴
+   */
+  disableCP() {
+    let html = document.querySelector('html')
+    html.oncopy = () => false
+    html.onpaste = () => false
+  }
+
+  /**
+   * 滚动条平滑滚动
+   */
+  animateScrollTo(ele, option) {
+    ele.scrollTo({
+      top: option.top ? option.top : 0,
+      left: option.left ? option.left : 0,
+      behavior: 'smooth'
+    })
+  }
 }
