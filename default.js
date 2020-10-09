@@ -345,4 +345,31 @@ class CommonTool {
     return result;
   }
 
+  /**
+   * 求平均值
+   */
+  getMean(arr) {
+    return arr.reduce((total, pre) => total + Number(pre), 0) / arr.length
+  }
+
+  /**
+   * 验证邮箱
+   */
+  validateEmail(str) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(str)
+  }
+
+  /**
+   * 验证身份证
+   */
+  isCard(str) {
+    return /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(str)
+  }
+
+  /**
+   * 阶乘
+   */
+  factorial(n) {
+    return n < 0 ? (() => { throw new TypeError('Negative numbers are not allowed!') })() : n <= 1 ? 1 : n * this.factorial(n - 1)
+  }
 }
