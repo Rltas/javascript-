@@ -198,6 +198,19 @@
       behavior: 'smooth'
     })
   }
+
+  /**
+   * 移动端平滑滚动
+   */
+  function toTop(ele = window, top) {
+    let cb  = () => {
+      if (ele.scrollTop <= top) return;
+      let speed = 200;
+      ele.scrollTop -= speed;
+      requestAnimationFrame(cb);
+    }
+    requestAnimationFrame(cb);
+  }
   /**
    * 禁止网页复制粘贴
    */

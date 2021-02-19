@@ -8,3 +8,9 @@
 # git push -u origin bendi:yuancheng
 
 # ...
+
+#删除远程分支
+#git push origin --delete dev_20181018
+
+#删除本地分支
+#git branch -d dev_20181018

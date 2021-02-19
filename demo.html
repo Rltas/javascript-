@@ -6,62 +6,10 @@
   <title>Document</title>
 </head>
 <body>
-  <script>
-    // function Point(x, y) {
-    //   this.x = x;
-    //   this.y = y;
-    // }
-    // Point.prototype.toString = function() {
-    //   return `${this.x},${this.y}`;
-    // }
-    // let p = new Point(1, 2);
-    // console.log(p.toString);
-    class Point {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-      }
-      
-      tostring() {
-        return `${this.x}, ${this.y}`;
-      }
-    }
-    let p = new Point(3, 4);
-    console.log(p.tostring());
-    let arr = [1, 2, 3]
-    let test = () => {
-      return new Promise((resolve, reject) => {
-        let judge = arr.some(item => item == 4);
-        if (judge) {
-          setTimeout(() => {
-            resolve("I'm find");
-          }, 1000)
-        } else {
-          setTimeout(() => {
-            resolve("Not find");
-          }, 1000)
-        }
-      })
-    }
-    test().then(res => {
-      setTimeout(() => {
-        console.log(res)
-      }, 2000)
-    }).then(() => {
-      console.log('56565656');
-    })
-    function sizer(all, part, key) {
-      return all.filter(item => part.some(ele => ele[key] == item[key]));
-    }
-    let arr_1 = [{
-      id: 1
-    }, {
-      id: 2
-    }];
-    let arr_2 = [{
-      id: 1
-    }]
-    console.log(sizer(arr_1, arr_2, 'id'));
-  </script>
+  <h1>My first page</h1>
+
+<?php
+echo "Hello World!";
+?>  
 </body>
 </html>
