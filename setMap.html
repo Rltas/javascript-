@@ -4,10 +4,103 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Set Map</title>
+  <script src="./upDefault.js"></script>
 </head>
 <body>
   <script>
-    
+    // let count = 0;
+    // let bubbleSort = arr => {
+    //   for (let i = 0 , len = arr.length - 1; i < len; i++) {
+    //     for (let j = 0; j < len - 1 - i; j++) {
+    //       count++;
+    //       if (arr[j] > arr[j+1]) {
+    //         [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
+    //       }
+    //     }
+    //   }
+    //   console.log(count);
+    //   return arr;
+    // }
+    // let arr = [1,5,3,4,8,6,7];
+    // console.log(bubbleSort(arr));
+
+    // // let selectSort = arr => {
+    // //   let minIndex;
+    // //   for(let )
+    // // }
+
+
+    //   setTimeout((x, y) => {
+    //     console.log(x + y, '***');
+    //   },1000, ...[7, 8]);
+
+    //   let one = 2;
+    //   let two = new Promise(resolve => {
+    //     setTimeout(resolve,2000, 8)
+    //   })
+    //   let three = 6;
+    //   Promise.all([one, two, three]).then((value) => {
+    //     console.log(value);
+    //   })
+    //   let num = 0;
+    //   console.log(num++,++num , '+++++++++++++')
+
+  // let posttingAll = function(promise) {
+  //     let count = 0;
+  //     let result = [];
+  //     return new Promise((resolve, reject) => {
+  //       if (promise.length == 0) {
+  //         resolve(result);
+  //       } else {
+  //         function promiseValue(i, data) {
+  //           result[i] = data;
+  //           if (++count == promise.length) {
+  //             resolve(result);
+  //           }
+  //         }
+  //         for(let i = 0; i < promise.length; i++) {
+  //           Promise.resolve(promise[i]).then(data => {
+  //             promiseValue(i, data);
+  //           })
+  //         }
+  //       }
+  //     })
+  //   }
+
+    let posttingAll = promise => {
+      let count = 0;
+      let result = [];
+      return new Promise((resolve, reject) => {
+        if (promise.length === 0) {
+          resolve(result);
+        } else {
+          function promiseValue(i, data) {
+            result[i] = data;
+            if (++count === promise.length) {
+              resolve(result);
+            }
+          }
+          for (let i in promise) {
+            Promise.resolve(promise[i]).then(data => {
+              promiseValue(i, data);
+            })
+          }
+        }
+      })
+    }
+    let one = new Promise(resolve => {
+      setTimeout(resolve, 3000, 1);
+    })
+    let two = new Promise(resolve => {
+      setTimeout(resolve, 2000, 2);
+    })
+
+    let three =  new Promise(resolve => {
+      setTimeout(resolve, 1000, 3);
+    }) 
+    posttingAll([one, two, three]).then(res => {
+      console.log(res);
+    })
   </script>
 </body>
 </html>

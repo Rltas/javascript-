@@ -211,6 +211,16 @@
     }
     requestAnimationFrame(cb);
   }
+
+  function toTop(ele = window, top = 0) {
+    let cb = () => {
+      if (ele.scrollTop <= top) return;
+      let speed = 200;
+      ele.scrollTop -= speed;
+      requestAnimationFrame(cb);
+    }
+    requestAnimationFrame(cb);
+  }
   /**
    * 禁止网页复制粘贴
    */
@@ -247,8 +257,8 @@
    * Bulle
    */
   function bubble(arr) {
-    for (let i = 0, len = arr.length; i < len; i++) {
-      for (let j = 0; j < len - 1; j++) {
+    for (let i = 0, len = arr.length - 1; i < len; i++) {
+      for (let j = 0; j < len - 1 - i; j++) {
         if (arr[j] > arr[j + 1]) {
           [a[j], a[j + 1]] = [a[j + 1], a[j]];
         }
@@ -356,3 +366,28 @@
     }
     return result;
   }
+
+/**
+ * Promise.all()实现原理  适用于多起异步顺序进行
+ */
+function posttingAll(promise) {
+  let count = 0;
+  let result = [];
+  return new Promise((resolve, reject) => {
+    if (promise.length == 0) {
+      resolve(result);
+    } else {
+      function promiseValue(key, data) {
+        resolve[key] = data;
+        if (++count == promise.length) {
+          resolve(result);
+        }
+      }
+      for (let i in promise) {
+        promise.resolve(promise[i]).then((value) => {
+          promiseValue(i, value);
+        })
+      }
+    }
+  })
+}
